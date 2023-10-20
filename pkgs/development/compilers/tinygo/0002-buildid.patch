@@ -1,0 +1,13 @@
+diff --git a/builder/buildid.go b/builder/buildid.go
+--- a/builder/buildid.go
++++ b/builder/buildid.go
+@@ -13,6 +13,9 @@ import (
+ 
+ // ReadBuildID reads the build ID from the currently running executable.
+ func ReadBuildID() ([]byte, error) {
++	// The build ID seems to be gone on Linux (both the Go build ID and the GNU
++	// build ID), so replace it with our own.
++	return []byte("OUT_PATH"), nil
+ 	executable, err := os.Executable()
+ 	if err != nil {
+ 		return nil, err
